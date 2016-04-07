@@ -31,6 +31,7 @@ install: all
 ifneq ($(IMPLIB),)
 	install -m 644 $(IMPLIB) $(DESTDIR)$(libdir)
 else
+	$(RM) $(libdir)/lib$(BASENAME).*.*
 	install -m 644 $(SONAME) $(DESTDIR)$(libdir)/$(SONAME)
 	$(if $(SONAME), ln -f -s $(libdir)/$(SONAME) $(DESTDIR)$(vsplugindir)/$(SONAME_LN))
 endif
