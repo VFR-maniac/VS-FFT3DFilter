@@ -83,7 +83,8 @@
 
 #include <cstring>
 #include <algorithm>
-
+#include <cmath>
+#include <stdlib.h>
 #include "FFT3DFilter.h"
 #include "info.h"
 
@@ -197,8 +198,8 @@ static void SigmasToPattern( float sigma, float sigma2, float sigma3, float sigm
 {
     /* it is not fast, but called only in constructor */
     float sigmacur;
-    constexpr float ft2 = sqrt( 0.5f ) / 2; /* frequency for sigma2 */
-    constexpr float ft3 = sqrt( 0.5f ) / 4; /* frequency for sigma3 */
+    const float ft2 = sqrt( 0.5f ) / 2; /* frequency for sigma2 */
+    const float ft3 = sqrt( 0.5f ) / 4; /* frequency for sigma3 */
     for( int h = 0; h < bh; h++ )
     {
         for( int w = 0; w < outwidth; w++ )
