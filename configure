@@ -163,19 +163,20 @@ else
 fi
 case "$TARGET_OS" in
     *mingw*|*cygwin*)
-        SYS="WIN32"
         SOSUFFIX="dll"
         SONAME="$BASENAME.$SOSUFFIX"
         SOFLAGS="-Wl,--enable-auto-image-base -Wl,--export-all-symbols"
         ;;
     *darwin*)
-        SYS="MACOSX"
         SOSUFFIX="dylib"
         SONAME="lib$BASENAME.$REV.$SOSUFFIX"
         SONAME_LN="lib$BASENAME.$SOSUFFIX"
         SOFLAGS="-dynamiclib -Wl,-single_module -Wl,-read_only_relocs,suppress -install_name ${DESTDIR}${libdir}/${SONAME}"
+        CXXFLAGS="$CXXFLAGS -fPIC"
+        LDFLAGS="-fPIC $LDFLAGS"
+        DEPLIBS="libfftw3f_threads $DEPLIBS libm"
         ;;
-    *)
+	*linux*)
         SOSUFFIX="so"
         SONAME="lib$BASENAME.$SOSUFFIX.$REV"
         SONAME_LN="lib$BASENAME.$SOSUFFIX"
@@ -183,7 +184,9 @@ case "$TARGET_OS" in
         CXXFLAGS="$CXXFLAGS -fPIC"
         LDFLAGS="-fPIC $LDFLAGS"
         DEPLIBS="libfftw3f_threads $DEPLIBS libm"
-        ;;
+		;;
+	*)
+		error_exit "target is unsupported system"
 esac
 
 # -- add extra --------------------------------------------------------------------------------

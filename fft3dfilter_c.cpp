@@ -22,7 +22,7 @@
  *****************************************************************************/
 
 #include <algorithm>
-
+#include <cmath>
 #include <fftw3.h>
 
 // since v1.7 we use outpitch instead of outwidth
