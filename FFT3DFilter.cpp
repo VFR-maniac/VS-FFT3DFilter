@@ -290,7 +290,7 @@ FFT3DFilter::FFT3DFilter
     if( plane < 3 )
     {
         nox = ((vi.width  >> (plane ? vi.format->subSamplingW : 0)) - ow + (bw - ow - 1)) / (bw - ow);
-        noy = ((vi.height >> (plane ? vi.format->subSamplingW : 0)) - oh + (bh - oh - 1)) / (bh - oh);
+        noy = ((vi.height >> (plane ? vi.format->subSamplingH : 0)) - oh + (bh - oh - 1)) / (bh - oh);
     }
     else
         throw bad_param{ "internal plane must be 0, 1 or 2" };
